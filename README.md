@@ -127,3 +127,5 @@ Now you are set to run this project
 ### Additional Links
 
 For the full walk-through : [Blog](https://themj0ln1r.github.io/)
+
+> `Please let me know there was any bug/flaw in the implementation..`
