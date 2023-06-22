@@ -88,7 +88,7 @@ def recieve():
 			chunk_size = 1024
 			received_data = b""
 
-			print("Buffering...")
+			
 			while True:
 			    chunk = client.recv(chunk_size)		#6
 			    if b"DONE" in chunk:
@@ -96,6 +96,7 @@ def recieve():
 			    received_data += chunk
 
 			# decrypting video
+			print("Buffering...")
 			video = get_decrypted_video(received_data,iv)
 			video = video.rstrip(b"\x00")		#removing padded bytes
 			with open(f"outputs/{choice}.mp4","wb") as f:

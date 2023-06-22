@@ -22,7 +22,7 @@ def vid_generation(video_path):
 	vc0_16bytes = vc0_chunk.read(16)
 	return bytes_to_long(vc0_16bytes)
 
-def ecc_key_1_generation(rmac,vid): # Used in the encryption VC1
+def ecc_key_1_generation(rmac,vid): # Used in the encryption VC0
 	
 	data = long_to_bytes(vid) + bytes.fromhex(rmac.replace(':',''))
 	h = hashlib.sha256(data).digest()
