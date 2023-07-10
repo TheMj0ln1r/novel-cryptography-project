@@ -53,6 +53,7 @@ def main_decrypt(enc_video,iv):
 			key = keyi
 
 		# print(AESkeys)
+		print("Buffering...⏳⏳⏳⏳⏳⏳") #####
 		m = decrypt(enc_video,AESkeys,iv,kpr,vc0)
 
 		m = m.rstrip(b'\x00')

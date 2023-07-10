@@ -8,7 +8,8 @@ import base64
 import os
 
 
-host = '127.0.0.1'
+# host = '127.0.0.1'
+host = '0.0.0.0'
 port = 9999
 
 server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -66,17 +67,17 @@ def handle(client):
 			3. Digital Signatures
 			4. AES security
 			0. Exit
-		Choose any one video from the playlist(1/2/3/4) : 
-			"""
+		Choose any one video from the playlist(1/2/3/4) : """
 
 			client.send(playlist.encode("ascii"))  #3
-			choice = client.recv(100).decode("ascii") 	#c3
+			choice = client.recv(2).decode("ascii") 	#c3
+			print(choice)
 			if choice:
 				print(f'{email} choosed {choice}')
 
 			video,iv = get_encrypted_video(choice,email)
 
-			client.send("Recieving video chunks...".encode("ascii"))	#4
+			client.send("Receiving video chunks...".encode("ascii"))	#4
 
 			client.send(iv)		#5
 			

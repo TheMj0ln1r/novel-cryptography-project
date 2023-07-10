@@ -32,18 +32,18 @@ def check_email_address(email_address):
 
 email = input("Enter Email : ")
 if not check_email_address(email):
-	print("Invalid Email")
+	print("🛑Invalid Email")
 	exit(1)
 
 password = input("Enter Password : ")
 if not password:
-	print("Password shouldn't be empty..")
+	print("🛑Password shouldn't be empty..")
 	exit(1)
 
 password = base64.b64encode(password.encode())
 
 
-target = '127.0.0.1'
+target = input("Enter your assigned server address : ")
 port = 9999
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -79,7 +79,7 @@ def recieve():
 
 			print(f"Sending Your Request for Video {choice}...")
 			#printing receiving video
-			recv_status = client.recv(100).decode("ascii")	#4
+			recv_status = client.recv(25).decode("ascii")	#4
 			print(recv_status)
 
 			# receive iv
@@ -96,26 +96,25 @@ def recieve():
 			    received_data += chunk
 
 			# decrypting video
-			print("Buffering...")
 			video = get_decrypted_video(received_data,iv)
 			video = video.rstrip(b"\x00")		#removing padded bytes
 			with open(f"outputs/{choice}.mp4","wb") as f:
 				f.write(video)
-				print("Playing Video..")
+				print("\nPlaying Video ▶️ ")
 
 			final_status = playvideo(f"outputs/{choice}.mp4")
 			if final_status:
-				print("It was done :)")
+				print("\n✅ It was done :)")
 				exit(1)
 
 
 		except Exception as e:
 			print("Error occurred!")
 			if e:
-				print("Oops, Thats not a Valid Private Key..")
-				print("1. Check your Registered MAC\n2. Enter Private_key of registered public key")
-				print("Error Message : ",e)
-				print("If none of these works send Error Message to the ADMIN")
+				print("🛑  Oops, Thats not a Valid Private Key")
+				print("🛑 1. Check your Registered MAC\n2. Enter Private_key of registered public key")
+				print("🛑 Error Message : ",e)
+				print("🛑 If none of these works send Error Message to the ADMIN")
 			client.close()
 			break
 

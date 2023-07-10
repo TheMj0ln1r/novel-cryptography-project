@@ -67,8 +67,7 @@ def main_encrypt(video_path,email,db_path):
 		print(kpub)
 
 		rmac = get_mac(row[1])
-
-
+		
 		iv = get_random_bytes(16)
 
 		AESkeys = []
